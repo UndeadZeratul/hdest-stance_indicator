@@ -210,28 +210,110 @@ OptionMenu "hdstance_Compatibility CVars"
 }
 
 OptionMenu "HDSINFO" {
-	Title "Stance Indicator Info"
-
-	StaticText "Everything in this mod is configured through CVars,", "white"
-	StaticText "because I can't be bothered to make custom menu stuff.", "white"
+	ScrollTop 2
+	Title "Stance Indicator Options"
+	
+	SafeCommand "Reset all CVARs to Default", "hdstance_resetallcvars"
+	StaticText " "
+	
+	StaticText "= Primary Options =", "gold"
 	StaticText " ", "white"
-	StaticText "All of this is generated from", "white"
-	StaticText "the readme.md provided with this addon.", "white"
-	StaticText "So you can read that instead if you want.", "white"
+	Option "Show Speed Indicator", "hdstance_showspeed", "YesNo"
+	Option "Show Brace Indicator", "hdstance_showbraced", "YesNo"
+	Option "Show Strip Indicator", "hdstance_showstrip", "YesNo"
+	Option "Show Shadow Box around Indicator", "hdstance_drawshadowbox", "YesNo"
+	Option "Hideous Helmet Compat", "hdstance_enablehhelmetcompat", "YesNo"
+	StaticText "(Requires Hideous Helmet)", "dark gray"
+	StaticText "Hides the indicator when the player", "dark gray"
+	StaticText "isn't wearing a helmet", "dark gray"
 	StaticText " ", "white"
-	Submenu "General CVars", "hdstance_General CVars"
-	Submenu "Speed Indicator CVars", "hdstance_Speed Indicator CVars"
-	Submenu "Brace Indicator CVars", "hdstance_Brace Indicator CVars"
-	Submenu "Strip Indicator CVars", "hdstance_Strip Indicator CVars"
-	Submenu "Shadow Box CVars", "hdstance_Shadow Box CVars"
-	Submenu "Skinned CVars", "hdstance_Skinned CVars"
-	Submenu "Flag CVars", "hdstance_Flag CVars"
-	Submenu "Compatibility CVars", "hdstance_Compatibility CVars"
+	StaticText "Indicator Scale", "white"
+	Slider "Scale X", "hdstance_scalex", 0.01, 1, 0.01, 2
+	Slider "Scale Y", "hdstance_scaley", 0.01, 1, 0.01, 2
+	Slider "Indicator Transparency", "hdstance_alpha", 0, 1, 0.1
 	StaticText " ", "white"
-	SafeCommand "Reset all CVars to default", "hdstance_resetallcvars"
-
+	StaticText "Shadow Box Scale", "white"
+	Slider "Scale X", "hdstance_boxsizex", 5, 1000, 1, 0
+	Slider "Scale Y", "hdstance_boxsizey", 5, 1000, 1, 0
+	Slider "Shadow Box Transparency", "hdstance_boxalpha", 0.1, 1, 0.1
+	StaticText " ", "white"
+	Option "Strip: Use tics instead of Seconds", "hdstance_stripusetic", "YesNo"
+	Option "Strip: Always show the timer", "hdstance_stripalwaysshow", "YesNo"
+	StaticText " ", "white"
+	Option "Use Stencil", "hdstance_usestencil", "YesNo"
+	Option "Use Player Color", "hdstance_useplayercol", "YesNo", "hdstance_usestencil"
+	StaticText " ", "white"
+	StaticText "= Player Skin Options =", "gold"
+	StaticText " ", "white"
+	Option "Use Player Skin", "hdstance_skinned", "YesNo"
+	Option "Animate Player Skin", "hdstance_animate", "YesNo", "hdstance_skinned"
+	Option "Set Skin's Facing Direction", "hdstance_angle", "hdstanceCardinals", "hdstance_skinned"
+	Option "Use PlayerAngle", "hdstance_useplayerangle", "YesNo", "hdstance_skinned"
+	Option "Use Old Rotation Calcs", "hdstance_playercompass", "YesNo", "hdstance_skinned"
+	Option "SPEEN", "hdstance_speen", "YesNo", "hdstance_skinned"
+	Slider "SPEEN Rate (lower = faster)", "hdstance_speenrate", 1, 10, 1, 0, "hdstance_skinned"
+	StaticText " ", "white"
+	StaticText "= Position =", "gold"
+	StaticText " ", "white"
+	StaticText "Indicator Position", "white"
+	Slider "Pos X", "hdstance_posx", -100, 100, 1, 0
+	Slider "Pos Y", "hdstance_posy", -100, 100, 1, 0
+	StaticText " ", "white"
+	StaticText "Shadow Box Offset", "white"
+	Slider "Offset X", "hdstance_boxoffsetx", -100, 100, 1, 0
+	Slider "Offset Y", "hdstance_boxoffsety", -100, 100, 1, 0
+	StaticText " ", "white"
+	StaticText "Speed Indicator Offset", "white"
+	Slider "Offset X", "hdstance_speedoffsetx", -100, 100, 1, 0
+	Slider "Offset Y", "hdstance_speedoffsety", -100, 100, 1, 0
+	StaticText " ", "white"
+	StaticText "Brace Indicator Offset", "white"
+	Slider "Offset X", "hdstance_bracedoffsetx", -100, 100, 1, 0
+	Slider "Offset Y", "hdstance_bracedoffsety", -100, 100, 1, 0
+	StaticText " ", "white"
+	StaticText "Strip Indicator Offset", "white"
+	Slider "Offset X", "hdstance_stripoffsetx", -100, 100, 1, 0
+	Slider "Offset Y", "hdstance_stripoffsety", -100, 100, 1, 0
+	StaticText " ", "white"
+	StaticText "= Text =", "gold"
+	StaticText " ", "white"
+	TextField "Speed Indicator Text", "hdstance_speedtext"
+	TextField "Brace Indicator Text", "hdstance_bracedtext"
+	Slider "Brace Text Repeat", "hdstance_bracedtextrepeat", 1, 10, 1, 0
+	StaticText " ", "white"
+	StaticText "= Flags =", "gold"
+	StaticText " ", "white"
+	StaticText "Replace numbers with desired numbers in cyan", "dark gray"
+	TextField "Position Flags, XYZ:", "hdstance_screenflags"
+	StaticText "For X: 1 None, 2 Bottom, 3 Top", "cyan"
+	StaticText "For Y: 1 None, 2 Center, 3 VCenter, 4 HCenter", "cyan"
+	StaticText "For Z: 1 None, 2 Left, 3 Right", "cyan"
+	StaticText "If the indicator 'disappears', adjust Indicator Position", "dark gray"
+	StaticText " ", "white"
+	TextField "Speed Text Align Flags, XY:", "hdstance_speedtextalign"
+	TextField "Brace Text Align Flags, XY:", "hdstance_bracedtextalign"
+	TextField "Strip Text Align Flags, XY:", "hdstance_striptextalign"
+	StaticText "For X: 1 Horizontal, 2 Vertical", "cyan"
+	StaticText "For Y if X is 1: 1 Left, 2 Center, 3 Right", "cyan"
+	StaticText "For Y if X is 2: 1 Top, 2 Center, 3 Bottom", "cyan"
+	
+	
+}
+OptionValue "hdstanceCardinals" {
+	1, "S"
+	2, "NW"
+	3, "E"
+	4, "NE"
+	5, "N"
+	6, "NW"
+	7, "W"
+	8, "SW"
 }
 
 AddOptionMenu "OptionsMenu" {
+	Submenu "Stance Indicator Info", "HDSINFO"
+}
+
+AddOptionMenu "HDAddonMenu" {
 	Submenu "Stance Indicator Info", "HDSINFO"
 }
